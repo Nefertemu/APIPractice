@@ -8,6 +8,7 @@
 import UIKit
 
 class GameTableViewCell: UITableViewCell {
+    
 
     @IBOutlet var gameImage: UIImageView!
     @IBOutlet var gameInfoLabel: [UILabel]!

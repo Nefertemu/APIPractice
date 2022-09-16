@@ -63,11 +63,14 @@ class GameListTableViewController: UITableViewController {
             }
             
             cell.gameImage.downloaded(from: games[indexPath.row].thumbnail)
-            
             return cell
         }
         
         return UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        200
     }
     
     private func registerTableViewCells() {
