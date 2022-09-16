@@ -16,7 +16,6 @@ class GameListTableViewController: UITableViewController {
         
         fetchGames()
         registerTableViewCells()
-        print(games)
     }
     
     private func fetchGames() {
@@ -29,6 +28,7 @@ class GameListTableViewController: UITableViewController {
                     let parsedJSON = try jsonDecoder.decode([Game].self, from: data)
                     DispatchQueue.main.async {
                         self.games = parsedJSON
+                        print(self.games)
                         self.tableView.reloadData()
                     }
                 } catch {
@@ -54,14 +54,14 @@ class GameListTableViewController: UITableViewController {
             for label in cell.gameInfoLabel {
                 switch label.tag {
                 case 0: label.text = "Title: \(games[indexPath.row].title)"
-                case 1: label.text = games[indexPath.row].genre
-                case 2: label.text = games[indexPath.row].platform
-                case 3: label.text = games[indexPath.row].developer
-                case 4: label.text = games[indexPath.row].short_description
-                default: label.text = games[indexPath.row].release_date
+                case 1: label.text = "Genre: \(games[indexPath.row].genre)"
+                case 2: label.text = "Platform: \(games[indexPath.row].platform)"
+                case 3: label.text = "Developer: \(games[indexPath.row].developer)"
+                case 5: label.text = games[indexPath.row].short_description
+                default: label.text = "Release date: \(games[indexPath.row].release_date)"
                 }
             }
-            cell.gameImage.contentMode = .scaleAspectFill
+            
             cell.gameImage.downloaded(from: games[indexPath.row].thumbnail)
             
             return cell
@@ -77,21 +77,12 @@ class GameListTableViewController: UITableViewController {
                                 forCellReuseIdentifier: "game")
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-    
 }
 
+// MARK: - Extensions
+
 extension UIImageView {
+    
     func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
         contentMode = mode
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -106,6 +97,7 @@ extension UIImageView {
             }
         }.resume()
     }
+    
     func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFit) {
         guard let url = URL(string: link) else { return }
         downloaded(from: url, contentMode: mode)
