@@ -73,6 +73,10 @@ class GameListTableViewController: UITableViewController {
         200
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     private func registerTableViewCells() {
         let gameCell = UINib(nibName: "GameTableViewCell",
                              bundle: nil)
