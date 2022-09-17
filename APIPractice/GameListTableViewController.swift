@@ -19,7 +19,7 @@ class GameListTableViewController: UITableViewController {
     }
     
     private func fetchGames() {
-        guard let url = URL(string: "https://www.freetogame.com/api/games?platform=browser&category=mmorpg&sort-by=release-date") else { return }
+        guard let url = URL(string: "https://www.freetogame.com/api/games?platform=pc&category=action&sort-by=release-date") else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data {
