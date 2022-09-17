@@ -53,7 +53,8 @@ class GameListTableViewController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "game") as? GameTableViewCell {
             for label in cell.gameInfoLabel {
                 switch label.tag {
-                case 0: label.text = "Title: \(games[indexPath.row].title)"
+                case 0: label.text = games[indexPath.row].title
+                        label.font = .boldSystemFont(ofSize: 18)
                 case 1: label.text = "Genre: \(games[indexPath.row].genre)"
                 case 2: label.text = "Platform: \(games[indexPath.row].platform)"
                 case 3: label.text = "Developer: \(games[indexPath.row].developer)"
